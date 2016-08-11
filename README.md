@@ -2,7 +2,9 @@
 A simple slider view of images for Android applications.
 
 
-#Gradle Dependency
+
+
+##Gradle Dependency
 ```Gradle
 dependencies {
     // ... other dependencies
@@ -11,7 +13,7 @@ dependencies {
 ```
 
 
-#Getting Started
+##Getting Started
 You only need  a PhotosViewSlider on your Layout Activity.
 ```xml
 <br.com.jeancsanchez.photoviewslider.PhotosViewSlider
@@ -20,7 +22,7 @@ You only need  a PhotosViewSlider on your Layout Activity.
         android:layout_height="match_parent"/>
 ```
 
-#Code Setup
+##Code Setup
 Create a list of Photo objects and set the values to it.
 ```Java
 photoViewSlider = (PhotosViewSlider) findViewById(R.id.photosViewSlider);
