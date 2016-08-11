@@ -10,7 +10,7 @@ ext {
 
     libraryDescription = 'A simple slider view of images for Android applications.'
 
-    siteUrl = 'https://github.com/jeancsanchez/PhotoViewSlider'
+    siteUrl = 'https://jeancsanchez.github.io/PhotoViewSlider/'
     gitUrl = 'https://github.com/jeancsanchez/PhotoViewSlider.git'
 
     libraryVersion = '0.0.1'
@@ -57,3 +57,5 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 }
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
