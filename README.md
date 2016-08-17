@@ -8,7 +8,7 @@ A simple slider view of images for Android applications.
 ```Gradle
 dependencies {
     // ... other dependencies
-
+    compile 'io.github.jeancsanchez.photoviewslider:photoviewslider:1.0.0'
 }
 ```
 
@@ -45,4 +45,9 @@ photoList.add(photo2);
 ###Init the photos
 ```java
 photoViewSlider.initializePhotos(photoList, 3);
+```
+
+###Change transition animation anytime
+```java
+photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
 ```
