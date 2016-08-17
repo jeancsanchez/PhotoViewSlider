@@ -46,3 +46,8 @@ photoList.add(photo2);
 ```java
 photoViewSlider.initializePhotos(photoList, 3);
 ```
+
+###Change transition animation
+```java
+photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
+```
