@@ -4,8 +4,11 @@ package br.com.jeancsanchez.photoviewslider;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
@@ -19,8 +22,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class PhotosViewSlider extends LinearLayout implements View.OnClickListener, View.OnTouchListener {
@@ -39,6 +48,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
     private TextView txtDescriptionGallery;
     private ImageView imgPhoto;
     private List<Photo> photos;
+    private Techniques techniqueAnimation = Techniques.FadeIn;
     private int gridColumns = 2;
 
 
@@ -61,6 +71,16 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         recyclerView = (RecyclerView) findViewById(R.id.photosList);
     }
 
+
+    /**
+     *
+     * @param photos List of photos that will to be show on grid.
+     */
+    public void initializePhotos(List<Photo> photos) {
+        this.photos = photos;
+        adapterSetup();
+    }
+
     /**
      *
      * @param photos List of photos that will to be show on grid.
@@ -71,6 +91,20 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         this.gridColumns = gridColumns;
         adapterSetup();
     }
+
+    /**
+     *
+     * @param photos List of photos that will to be show on grid.
+     * @param techniqueAnimation Type/Technique of animation on photos detail
+     * @param gridColumns Number of columns that photos grid will have.
+     */
+    public void initializePhotos(List<Photo> photos, Techniques techniqueAnimation, int gridColumns) {
+        this.photos = photos;
+        this.techniqueAnimation = techniqueAnimation;
+        this.gridColumns = gridColumns;
+        adapterSetup();
+    }
+
 
     private void adapterSetup() {
         photoAdapter = new PhotosViewAdapter(getContext());
@@ -104,6 +138,10 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         showImage(photo.getImage(), photo.getDescription(), currentPosition);
     }
 
+    public void setTechniqueAnimation(Techniques techniqueAnimation){
+        this.techniqueAnimation = techniqueAnimation;
+    }
+
 
     private void showImage(String url, String description, int currentPosition) {
         txtDescriptionGallery.setText(description);
@@ -118,6 +156,9 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
 
         builder.setContentView(viewDialog);
         builder.show();
+        YoYo.with(techniqueAnimation)
+                .duration(700)
+                .playOn(imgPhoto);
     }
 
 
@@ -125,15 +166,48 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
     public void onClick(View view) {
         int viewId = view.getId();
 
-        if (viewId == R.id.btn_share) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType("text/plain");
-
-            intent.putExtra(Intent.EXTRA_SUBJECT, "");
-            intent.putExtra(Intent.EXTRA_TEXT, "");
-            getContext().startActivity(Intent.createChooser(intent, "Share"));
-        }
+        if (viewId == R.id.btn_share)
+            preparePhotoForShare();
     }
+
+
+    private void preparePhotoForShare() {
+        final Bitmap[] image = new Bitmap[1];
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    image[0] = Picasso.with(getContext())
+                            .load(photos.get(currentPosition).getImage())
+                            .get();
+
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    image[0].compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+                    File file = new File(Environment.getExternalStorageDirectory() + File.separator + "image_temp.jpg");
+                    FileOutputStream fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    sendPhotoForShare();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    private void sendPhotoForShare() {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("image/jpeg");
+
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, photos.get(currentPosition).getDescription());
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(Environment.getExternalStorageDirectory().toURI() + "image_temp.jpg"));
+        getContext().startActivity(Intent.createChooser(shareIntent, "Share with..."));
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -201,7 +275,10 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         @Override
         public void onBindViewHolder(final PhotosAdapterViewHolder holder, int position) {
             holder.itemView.setTag(photoList.get(position));
-            Picasso.with(context).load(photoList.get(position).getImage()).fit().into(holder.photo);
+            Picasso.with(context).load(photoList.get(position).getImage())
+                    .fit()
+                    .placeholder(R.drawable.photodefault)
+                    .into(holder.photo);
         }
 
         @Override
