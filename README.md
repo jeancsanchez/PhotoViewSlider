@@ -1,6 +1,7 @@
 # PhotoViewSlider
 A simple slider view of images for Android applications.
 
+[ ![jCenter](https://api.bintray.com/packages/drummer-aidan/maven/easy-video-player/images/download.svg) ](https://bintray.com/drummer-aidan/maven/easy-video-player/_latestVersion)
 
 
 
@@ -51,3 +52,7 @@ photoViewSlider.initializePhotos(photoList, 3);
 ```java
 photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
 ```
+
+##Thanks
+* [Picasso](https://github.com/square/picasso)
+* [Android View Animations] (https://github.com/daimajia/AndroidViewAnimations)
