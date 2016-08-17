@@ -1,9 +1,6 @@
 # PhotoViewSlider
 A simple slider view of images for Android applications.
 
-[ ![jCenter](https://api.bintray.com/packages/drummer-aidan/maven/easy-video-player/images/download.svg) ](https://bintray.com/jeancsanchez/maven/PhotoViewSlider)
-
-
 
 ##Gradle Dependency
 ```Gradle
