@@ -9,7 +9,7 @@ A simple slider view of images for Android applications.
 ```Gradle
 dependencies {
     // ... other dependencies
-    compile 'io.github.jeancsanchez.photoviewslider:photoviewslider:1.0.0'
+    compile 'io.github.jeancsanchez.photoviewslider:photoviewslider:1.1.0'
 }
 ```
 
