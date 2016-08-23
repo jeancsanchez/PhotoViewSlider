@@ -1,5 +1,6 @@
 # PhotoViewSlider
 A simple slider view of images for Android applications.
+![alt tag](https://raw.githubusercontent.com/jeancsanchez/PhotoViewSlider/master/PhotoViewSlider.gif)
 
 
 ##Gradle Dependency
