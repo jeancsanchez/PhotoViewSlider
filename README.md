@@ -14,7 +14,7 @@ dependencies {
 ```
 
 ##Maven
-```Maven
+```xml
 <dependency>
   <groupId>io.github.jeancsanchez.photoviewslider</groupId>
   <artifactId>photoviewslider</artifactId>
