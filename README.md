@@ -13,6 +13,16 @@ dependencies {
 }
 ```
 
+##Maven
+```Maven
+<dependency>
+  <groupId>io.github.jeancsanchez.photoviewslider</groupId>
+  <artifactId>photoviewslider</artifactId>
+  <version>1.1.0</version>
+  <type>pom</type>
+</dependency>
+```
+
 
 ##Getting Started
 You only need  a PhotosViewSlider on your Layout Activity.
