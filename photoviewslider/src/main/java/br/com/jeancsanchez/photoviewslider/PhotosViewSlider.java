@@ -132,7 +132,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         generatePhotoDetail();
 
         for (int i = 0; i < photos.size(); i++)
-            if (photos.get(i).getImage().equals(photo.getImage()))
+            if (photos.get(i)  == photo)
                 currentPosition = i;
 
         showImage(photo.getImage(), photo.getDescription(), currentPosition);
