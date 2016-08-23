@@ -2,8 +2,6 @@
 A simple slider view of images for Android applications.
 
 
-
-
 ##Gradle Dependency
 ```Gradle
 dependencies {
@@ -51,3 +49,7 @@ photoViewSlider.initializePhotos(photoList, 3);
 ```java
 photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
 ```
+
+##Thanks
+* [Picasso](https://github.com/square/picasso)
+* [Android View Animations] (https://github.com/daimajia/AndroidViewAnimations)
