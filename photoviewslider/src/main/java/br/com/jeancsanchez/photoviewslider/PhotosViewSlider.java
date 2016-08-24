@@ -49,7 +49,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
     private ImageView imgPhoto;
     private List<Photo> photos;
     private Techniques techniqueAnimation = Techniques.FadeIn;
-    private int gridColumns = 2;
+    private int gridColumns = 3;
 
 
     public PhotosViewSlider(Context context){
