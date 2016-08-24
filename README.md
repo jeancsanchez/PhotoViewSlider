@@ -1,13 +1,26 @@
 # PhotoViewSlider
 A simple slider view of images for Android applications.
 
+![alt tag]
+(https://raw.githubusercontent.com/jeancsanchez/PhotoViewSlider/master/PhotoViewSlider.gif)
+
 
 ##Gradle Dependency
 ```Gradle
 dependencies {
     // ... other dependencies
-    compile 'io.github.jeancsanchez.photoviewslider:photoviewslider:1.0.0'
+    compile 'io.github.jeancsanchez.photoviewslider:photoviewslider:1.1.0'
 }
+```
+
+##Maven
+```xml
+<dependency>
+  <groupId>io.github.jeancsanchez.photoviewslider</groupId>
+  <artifactId>photoviewslider</artifactId>
+  <version>1.1.0</version>
+  <type>pom</type>
+</dependency>
 ```
 
 
