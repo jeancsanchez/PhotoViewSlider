@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://jeancsanchez.github.io/PhotoViewSlider/'
     gitUrl = 'https://github.com/jeancsanchez/PhotoViewSlider.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '1.2.0'
 
     developerId = 'jeancsanchez'
     developerName = 'Jean Carlos'
@@ -30,10 +30,10 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
