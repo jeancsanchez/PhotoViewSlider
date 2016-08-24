@@ -30,6 +30,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhotosViewSlider extends LinearLayout implements View.OnClickListener, View.OnTouchListener {
@@ -69,6 +70,20 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
     private void init(){
         inflate(getContext(), R.layout.photos_view, this);
         recyclerView = (RecyclerView) findViewById(R.id.photosList);
+        photoAdapter = new PhotosViewAdapter(getContext());
+    }
+
+
+    public void initializePhotos(){
+        try {
+            if (photos == null)
+                throw new PhotoListIsEmptyException();
+
+        }catch (PhotoListIsEmptyException e){
+            e.printStackTrace();
+        }
+
+        adapterSetup();
     }
 
 
@@ -77,9 +92,14 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
      * @param photos List of photos that will to be show on grid.
      */
     public void initializePhotos(List<Photo> photos) {
-        this.photos = photos;
+        if(this.photos == null)
+            this.photos = photos;
+        else
+            this.photos.addAll(photos);
+
         adapterSetup();
     }
+
 
     /**
      *
@@ -87,10 +107,15 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
      * @param gridColumns Number of columns that photos grid will have.
      */
     public void initializePhotos(List<Photo> photos, int gridColumns) {
-        this.photos = photos;
+        if(this.photos == null)
+            this.photos = photos;
+        else
+            this.photos.addAll(photos);
         this.gridColumns = gridColumns;
+
         adapterSetup();
     }
+
 
     /**
      *
@@ -99,20 +124,73 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
      * @param gridColumns Number of columns that photos grid will have.
      */
     public void initializePhotos(List<Photo> photos, Techniques techniqueAnimation, int gridColumns) {
-        this.photos = photos;
+        if(this.photos == null)
+            this.photos = photos;
+        else
+            this.photos.addAll(photos);
+
         this.techniqueAnimation = techniqueAnimation;
         this.gridColumns = gridColumns;
         adapterSetup();
     }
 
 
+    /**
+     *
+     * @param photosUrls List of urls's photos that will to be show on grid.
+     */
+    public void initializePhotosUrls(ArrayList<String> photosUrls){
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        for(String photoUrl : photosUrls)
+            photos.add(new Photo(photoUrl));
+
+        adapterSetup();
+    }
+
+
+    /**
+     * Set image url to the list of photos
+     * @param imageUrl set image url
+     */
+    public void setPhotoUrl(String imageUrl){
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        photos.add(new Photo(imageUrl));
+    }
+
+
+    /**
+     * Set image url to the list of photos
+     * @param imageUrl set image url
+     * @param description set description to image
+     */
+    public void setPhotoUrl(String imageUrl, String description){
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        photos.add(new Photo(imageUrl, description));
+    }
+
+
+    /**
+     * Set an effect transition on photos details
+     * @param techniqueAnimation set image url
+     */
+    public void setTechniqueAnimation(Techniques techniqueAnimation){
+        this.techniqueAnimation = techniqueAnimation;
+    }
+
+
     private void adapterSetup() {
-        photoAdapter = new PhotosViewAdapter(getContext());
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(gridColumns, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(photoAdapter);
         photoAdapter.setupItems(photos);
     }
+
 
     private void generatePhotoDetail() {
         viewDialog = inflate(getContext(), R.layout.photo_detail, null);
@@ -135,11 +213,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
             if (photos.get(i)  == photo)
                 currentPosition = i;
 
-        showImage(photo.getImage(), photo.getDescription(), currentPosition);
-    }
-
-    public void setTechniqueAnimation(Techniques techniqueAnimation){
-        this.techniqueAnimation = techniqueAnimation;
+        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
     }
 
 
@@ -162,15 +236,6 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
     }
 
 
-    @Override
-    public void onClick(View view) {
-        int viewId = view.getId();
-
-        if (viewId == R.id.btn_share)
-            preparePhotoForShare();
-    }
-
-
     private void preparePhotoForShare() {
         final Bitmap[] image = new Bitmap[1];
 
@@ -179,7 +244,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
             public void run() {
                 try {
                     image[0] = Picasso.with(getContext())
-                            .load(photos.get(currentPosition).getImage())
+                            .load(photos.get(currentPosition).getImageUrl())
                             .get();
 
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -235,7 +300,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
                             currentPosition --;
 
                         Photo photo = photos.get(currentPosition);
-                        showImage(photo.getImage(), photo.getDescription(), currentPosition);
+                        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
                         return true;
                     }
 
@@ -247,11 +312,20 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
                             currentPosition ++;
 
                         Photo photo = photos.get(currentPosition);
-                        showImage(photo.getImage(), photo.getDescription(), currentPosition);
+                        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
                         return true;
                     }
             }
         return false;
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        int viewId = view.getId();
+
+        if (viewId == R.id.btn_share)
+            preparePhotoForShare();
     }
 
 
@@ -275,7 +349,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         @Override
         public void onBindViewHolder(final PhotosAdapterViewHolder holder, int position) {
             holder.itemView.setTag(photoList.get(position));
-            Picasso.with(context).load(photoList.get(position).getImage())
+            Picasso.with(context).load(photoList.get(position).getImageUrl())
                     .fit()
                     .placeholder(R.drawable.photodefault)
                     .into(holder.photo);

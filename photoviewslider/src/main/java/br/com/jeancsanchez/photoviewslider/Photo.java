@@ -7,10 +7,20 @@ import java.io.Serializable;
  */
 
 public class Photo implements Serializable {
-    private int id;
-    private String description;
-    private String image;
+    private String description = "";
+    private String imageUrl;
 
+
+    public Photo(){}
+
+    public Photo(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
+
+    public Photo(String imageUrl, String description){
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
 
     public String getDescription() {
         return description;
@@ -20,19 +30,11 @@ public class Photo implements Serializable {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
