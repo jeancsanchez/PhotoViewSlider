@@ -78,6 +78,10 @@ photoViewSlider.initializePhotos(photosList);
 photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
 ```
 
+
+##TO DO LIST
+- [ ] Make the recycler view "responsive" 
+
 ##Thanks
 * [Picasso](https://github.com/square/picasso)
 * [Android View Animations] (https://github.com/daimajia/AndroidViewAnimations)
