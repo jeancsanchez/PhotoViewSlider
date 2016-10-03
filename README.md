@@ -2,7 +2,7 @@
 ![Version](https://img.shields.io/badge/version-1.2.0-green.svg)
 [![Version](https://img.shields.io/badge/Bintray-jeancsanchez-blue.svg)](https://bintray.com/jeancsanchez/maven/PhotoViewSlider)
 <br/>
-A simple slider view of images for Android applications.
+A simple photo browser for Android applications.
 
 ![alt tag]
 (https://raw.githubusercontent.com/jeancsanchez/PhotoViewSlider/master/PhotoViewSlider.gif)
