@@ -1,5 +1,5 @@
 # PhotoViewSlider
-![Version](https://img.shields.io/badge/version-1.2.0-green.svg)
+[ ![Download](https://api.bintray.com/packages/jeancsanchez/maven/PhotoViewSlider/images/download.svg) ](https://bintray.com/jeancsanchez/maven/PhotoViewSlider/_latestVersion)
 [![Version](https://img.shields.io/badge/Bintray-jeancsanchez-blue.svg)](https://bintray.com/jeancsanchez/maven/PhotoViewSlider)
 <br/>
 A simple photo browser for Android applications.
