@@ -4,11 +4,10 @@
 <br/>
 A simple photo browser for Android applications.
 
-![alt tag]
-(https://raw.githubusercontent.com/jeancsanchez/PhotoViewSlider/master/PhotoViewSlider.gif)
+![](https://raw.githubusercontent.com/jeancsanchez/PhotoViewSlider/master/PhotoViewSlider.gif)
 
 
-##Gradle Dependency
+## Gradle Dependency
 ```Gradle
 dependencies {
     // ... other dependencies
@@ -16,7 +15,7 @@ dependencies {
 }
 ```
 
-##Maven
+## Maven
 ```xml
 <dependency>
   <groupId>io.github.jeancsanchez.photoviewslider</groupId>
@@ -27,7 +26,7 @@ dependencies {
 ```
 
 
-##Getting Started
+## Getting Started
 You only need  a PhotosViewSlider on your Layout Activity.
 ```xml
 <br.com.jeancsanchez.photoviewslider.PhotosViewSlider
@@ -36,20 +35,20 @@ You only need  a PhotosViewSlider on your Layout Activity.
         android:layout_height="match_parent"/>
 ```
 
-##Code Setup
-###Setup the view on your Activity
+## Code Setup
+### Setup the view on your Activity
 ```Java
 photoViewSlider = (PhotosViewSlider) findViewById(R.id.photosViewSlider);
 ```
 
-###Option 1: Set the urls on demand and initialize the photo view.
+### Option 1: Set the urls on demand and initialize the photo view.
 ```Java
 photoViewSlider.setPhotoUrl("http://awesomeimg.com.br", "any description");
 photoViewSlider.setPhotoUrl("http://awesomeimg.com.br");
 photoViewSlider.initializePhotos();
 ```
 
-###Option 2: Create a list of String urls, so initialize the photo view.
+### Option 2: Create a list of String urls, so initialize the photo view.
 ```Java
 stringsList = new ArrayList<>();
 
@@ -58,7 +57,7 @@ stringsList.add("http://awesomeimg.com.br");
 photoViewSlider.initializePhotosUrls(stringsList);
 ```
 
-###Option 3: Create a list of Photo objects and set the values to it, so initialize the photo view .
+### Option 3: Create a list of Photo objects and set the values to it, so initialize the photo view .
 ```Java
 photoList = new ArrayList<>();
 
@@ -76,15 +75,15 @@ photoList.add(photo2);
 photoViewSlider.initializePhotos(photosList);
 ```
 
-###Change transition animation (Optional)
+### Change transition animation (Optional)
 ```java
 photoViewSlider.setTechniqueAnimation(Techniques.BounceIn);
 ```
 
 
-##TO DO LIST
+## TO DO LIST
 - [ ] Make the recycler view "responsive" 
 
-##Thanks
+## Thanks
 * [Picasso](https://github.com/square/picasso)
 * [Android View Animations] (https://github.com/daimajia/AndroidViewAnimations)
