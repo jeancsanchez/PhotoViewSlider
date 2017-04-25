@@ -149,6 +149,22 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         adapterSetup();
     }
 
+    /**
+     *
+     * @param photosFiles List of File of photos that will to be show on grid.
+     */
+    public void initializePhotosFiles(ArrayList<File> photosFiles){
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        for(File photoFile : photosFiles)
+            photos.add(new Photo(photoFile));
+
+        adapterSetup();
+    }
+
+
+
 
     /**
      * Set image url to the list of photos
@@ -161,6 +177,23 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         photos.add(new Photo(imageUrl));
     }
 
+    /**
+     * Add image File to the list of photos
+     * @param imageFile the File Object representing the image
+     */
+    public void setPhotoFile(File imageFile) {
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        photos.add(new Photo(imageFile));
+    }
+
+    public void setPhotoFile(File imageFile, String description) {
+        if(photos == null)
+            photos = new ArrayList<>();
+
+        photos.add(new Photo(imageFile, description));
+    }
 
     /**
      * Set image url to the list of photos
@@ -213,18 +246,23 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
             if (photos.get(i)  == photo)
                 currentPosition = i;
 
-        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
+        showImage(photo, currentPosition);
     }
 
 
-    private void showImage(String url, String description, int currentPosition) {
-        txtDescriptionGallery.setText(description);
+    private void showImage(Photo photo, int currentPosition) {
+        txtDescriptionGallery.setText(photo.getDescription());
         txtCurrentPosition.setText(String.valueOf(currentPosition+1));
         txtPhotosTotal.setText(String.valueOf(photos.size()));
-        Picasso.with(getContext()).load(url).fit()
-                .placeholder(R.drawable.photodefault)
-                .into(imgPhoto);
-
+        if(photo.getImageUrl() == null) {
+            Picasso.with(getContext()).load(photo.getImageFile()).fit()
+                    .placeholder(R.drawable.photodefault)
+                    .into(imgPhoto);
+        } else {
+            Picasso.with(getContext()).load(photo.getImageUrl()).fit()
+                    .placeholder(R.drawable.photodefault)
+                    .into(imgPhoto);
+        }
         btnShare.setOnClickListener(this);
         viewDialog.setOnTouchListener(this);
 
@@ -300,7 +338,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
                             currentPosition --;
 
                         Photo photo = photos.get(currentPosition);
-                        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
+                        showImage(photo, currentPosition);
                         return true;
                     }
 
@@ -312,7 +350,7 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
                             currentPosition ++;
 
                         Photo photo = photos.get(currentPosition);
-                        showImage(photo.getImageUrl(), photo.getDescription(), currentPosition);
+                        showImage(photo, currentPosition);
                         return true;
                     }
             }
@@ -349,10 +387,17 @@ public class PhotosViewSlider extends LinearLayout implements View.OnClickListen
         @Override
         public void onBindViewHolder(final PhotosAdapterViewHolder holder, int position) {
             holder.itemView.setTag(photoList.get(position));
-            Picasso.with(context).load(photoList.get(position).getImageUrl())
-                    .fit()
-                    .placeholder(R.drawable.photodefault)
-                    .into(holder.photo);
+            if (photoList.get(position).getImageFile() != null) {
+                Picasso.with(context).load(photoList.get(position).getImageFile())
+                        .fit()
+                        .placeholder(R.drawable.photodefault)
+                        .into(holder.photo);
+            } else {
+                Picasso.with(context).load(photoList.get(position).getImageUrl())
+                        .fit()
+                        .placeholder(R.drawable.photodefault)
+                        .into(holder.photo);
+            }
         }
 
         @Override
