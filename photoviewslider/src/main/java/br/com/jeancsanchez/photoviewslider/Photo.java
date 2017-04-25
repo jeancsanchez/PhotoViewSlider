@@ -1,5 +1,6 @@
 package br.com.jeancsanchez.photoviewslider;
 
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -9,6 +10,7 @@ import java.io.Serializable;
 public class Photo implements Serializable {
     private String description = "";
     private String imageUrl;
+    private File imageFile;
 
 
     public Photo(){}
@@ -20,6 +22,16 @@ public class Photo implements Serializable {
     public Photo(String imageUrl, String description){
         this.imageUrl = imageUrl;
         this.description = description;
+        imageFile = null;
+    }
+
+    public Photo(File f, String description) {
+        this.imageFile = f;
+        this.description = description;
+    }
+
+    public Photo(File f) {
+        this.imageFile = f;
     }
 
     public String getDescription() {
@@ -32,6 +44,10 @@ public class Photo implements Serializable {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public File getImageFile() {
+        return imageFile;
     }
 
     public void setImageUrl(String imageUrl) {
