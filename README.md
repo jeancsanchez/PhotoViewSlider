@@ -1,7 +1,7 @@
 # PhotoViewSlider
 [ ![Download](https://api.bintray.com/packages/jeancsanchez/maven/PhotoViewSlider/images/download.svg) ](https://bintray.com/jeancsanchez/maven/PhotoViewSlider/_latestVersion)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/39a30a091fe24457ac7297e159a7e7e1)](https://app.codacy.com/app/jeancsanchez/PhotoViewSlider?utm_source=github.com&utm_medium=referral&utm_content=jeancsanchez/PhotoViewSlider&utm_campaign=Badge_Grade_Dashboard)
 [![Version](https://img.shields.io/badge/Bintray-jeancsanchez-blue.svg)](https://bintray.com/jeancsanchez/maven/PhotoViewSlider)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/39a30a091fe24457ac7297e159a7e7e1)](https://app.codacy.com/app/jeancsanchez/PhotoViewSlider?utm_source=github.com&utm_medium=referral&utm_content=jeancsanchez/PhotoViewSlider&utm_campaign=Badge_Grade_Dashboard)
 <br/>
 A simple photo browser for Android applications.
 
